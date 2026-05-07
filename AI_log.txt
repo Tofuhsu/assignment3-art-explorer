@@ -1,0 +1,143 @@
+CSCI 571 Assignment 3 – AI Usage Log
+
+Name: Hsuan-Fu Hsu
+USC ID: 8664638219
+
+--------------------------------------------------
+
+1. Initial Setup
+
+I used ChatGPT to guide me through setting up the project structure for the assignment. 
+This included creating the Node.js Express backend, organizing the frontend files under the public folder, 
+and configuring package.json.
+
+--------------------------------------------------
+
+2. Backend Development
+
+I used ChatGPT to:
+- Implement Express server routes
+- Create API endpoints for:
+  /api/search
+  /api/artwork/:source/:id
+  /api/artist/:name
+  /api/artist/:name/works
+
+I learned:
+- How to proxy requests to external APIs (Met Museum and Harvard API)
+- How to normalize different API responses into a unified format
+- How to handle async/await and error handling in Node.js
+
+--------------------------------------------------
+
+3. API Integration
+
+ChatGPT helped me understand:
+- How to call Met Museum API and Harvard Art API
+- How to merge results from multiple sources
+- How to filter results based on search query and image availability
+
+I initially had issues with:
+- Met API returning too many irrelevant results
+- Harvard API pagination
+
+These were fixed by refining filtering logic and implementing proper pagination.
+
+--------------------------------------------------
+
+4. Frontend Development
+
+I used ChatGPT to:
+- Build UI using Bootstrap 5
+- Implement search form, filters, and responsive layout
+- Render artwork cards dynamically using JavaScript
+
+I learned:
+- DOM manipulation using vanilla JS
+- Event handling and UI updates
+- Responsive design using Bootstrap grid system
+
+--------------------------------------------------
+
+5. Pagination & Filtering
+
+I implemented:
+- Server-side pagination
+- Total results count
+- Page navigation (Prev / Next)
+
+I had issues with:
+- Incorrect total count
+- Pagination breaking
+
+ChatGPT helped fix:
+- Calculating total after filtering
+- Syncing pagination with filtered results
+
+--------------------------------------------------
+
+6. Detail View
+
+I implemented:
+- Overview tab
+- Artist biography (Wikipedia API)
+- Related works
+- Museum location (Leaflet map)
+
+I learned:
+- Using Bootstrap tabs
+- Integrating third-party APIs (Wikipedia)
+- Handling dynamic tab content
+
+--------------------------------------------------
+
+7. Favorites Feature
+
+I implemented:
+- Add to Favorites
+- Remove from Favorites
+- LocalStorage persistence
+
+ChatGPT helped me:
+- Structure favorite data
+- Sync UI with storage
+
+--------------------------------------------------
+
+8. Debugging Issues
+
+Major issues I encountered:
+- Met filter returning 0 results
+- Has Image filter mixing results
+- Related Works click not working
+- Pagination mismatch
+
+ChatGPT helped debug each issue step by step by:
+- Fixing filtering logic
+- Fixing cache key issues
+- Fixing event listeners
+- Ensuring consistent state updates
+
+--------------------------------------------------
+
+9. Deployment
+
+I deployed the application using Google Cloud Run.
+
+I used ChatGPT to:
+- Create Dockerfile
+- Configure Cloud Build
+- Deploy using gcloud CLI
+
+--------------------------------------------------
+
+10. Conclusion
+
+ChatGPT was used as a learning assistant to:
+- Understand APIs and backend logic
+- Debug issues
+- Improve code structure
+
+All code was reviewed, tested, and modified to ensure correctness.
+
+--------------------------------------------------

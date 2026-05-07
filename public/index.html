@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art Explorer</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <span class="navbar-brand fw-semibold">Art Explorer</span>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <div class="ms-auto d-flex gap-2 mt-3 mt-lg-0">
+          <button id="navSearch" class="btn btn-outline-light" type="button">Search</button>
+          <button id="navFavorites" class="btn btn-outline-light position-relative" type="button">
+            Favorites
+            <span id="favoritesBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <section id="searchView">
+      <form id="searchForm" class="row g-3 align-items-end">
+        <div class="col-12 col-md-5">
+          <label for="searchInput" class="form-label">Search</label>
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="Search artworks, artists, or museums"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label for="sourceFilter" class="form-label">Source</label>
+          <select id="sourceFilter" class="form-select">
+            <option value="both" selected>Both Museums</option>
+            <option value="met">Met Museum</option>
+            <option value="harvard">Harvard Art</option>
+          </select>
+        </div>
+
+        <div class="col-12 col-md-2">
+          <label class="form-label invisible">Has Image</label>
+          <div class="custom-checkbox-box">
+            <input class="form-check-input" type="checkbox" id="hasImage">
+            <label class="form-check-label" for="hasImage">
+              Has Image
+            </label>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-2 d-grid">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
+
+      <div id="messageArea" class="mt-3"></div>
+      <div id="loadingArea" class="row g-3 mt-2 d-none"></div>
+      <div id="resultsArea" class="row g-3 mt-2"></div>
+
+      <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-2">
+        <div id="totalCountArea" class="fw-semibold text-muted"></div>
+
+        <div class="d-flex align-items-center gap-3 ms-auto">
+          <button id="prevBtn" class="btn btn-outline-secondary" disabled>Prev</button>
+          <div id="pageIndicator" class="text-muted">Page 0</div>
+          <button id="nextBtn" class="btn btn-outline-secondary" disabled>Next</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="favoritesView" class="d-none">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h2 class="h4 mb-0">Favorites</h2>
+      </div>
+
+      <div id="favoritesEmpty" class="alert alert-secondary d-none">
+        You haven't saved any favorites yet.
+      </div>
+
+      <div id="favoritesGrid" class="row g-3"></div>
+    </section>
+
+    <section id="detailView" class="d-none">
+      <button id="backBtn" class="btn btn-link ps-0 mb-3">← Back to Results</button>
+
+      <ul class="nav nav-tabs" id="detailTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            data-bs-toggle="tab"
+            data-bs-target="#overviewTab"
+            type="button"
+            role="tab"
+            aria-controls="overviewTab"
+            aria-selected="true"
+          >
+            Overview
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            data-bs-toggle="tab"
+            data-bs-target="#bioTab"
+            type="button"
+            role="tab"
+            aria-controls="bioTab"
+            aria-selected="false"
+          >
+            Artist Biography
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            data-bs-toggle="tab"
+            data-bs-target="#relatedTab"
+            type="button"
+            role="tab"
+            aria-controls="relatedTab"
+            aria-selected="false"
+          >
+            Related Works
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            id="mapTabButton"
+            class="nav-link"
+            data-bs-toggle="tab"
+            data-bs-target="#mapTabPane"
+            type="button"
+            role="tab"
+            aria-controls="mapTabPane"
+            aria-selected="false"
+          >
+            Museum Location
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content pt-3">
+        <div class="tab-pane fade show active" id="overviewTab" role="tabpanel"></div>
+        <div class="tab-pane fade" id="bioTab" role="tabpanel"></div>
+        <div class="tab-pane fade" id="relatedTab" role="tabpanel"></div>
+        <div class="tab-pane fade" id="mapTabPane" role="tabpanel">
+          <div id="mapContainer" class="map-frame"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/map.js"></script>
+  <script src="/js/favorites.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
