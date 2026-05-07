@@ -2,21 +2,21 @@
 
 A full-stack web application that allows users to search, explore, and save artworks from **The Metropolitan Museum of Art** and **Harvard Art Museums**.
 
-This project was developed as part of **CSCI 571 (Web Technologies)** at USC.
+This project was developed as part of **CSCI 571 – Web Technologies (USC)**.
 
 ---
 
 ## 🚀 Live Demo
 
 🔗 Cloud Run URL:  
-> https://YOUR_CLOUD_RUN_URL
+https://art-explorer-394763791461.us-central1.run.app
 
 ---
 
 ## ✨ Features
 
-### 🔍 Search & Filter
-- Search artworks by keyword
+### 🔍 Search & Filters
+- Search artworks by keyword (e.g., Monet, Van Gogh)
 - Filter by museum:
   - Met Museum
   - Harvard Art Museums
@@ -27,14 +27,14 @@ This project was developed as part of **CSCI 571 (Web Technologies)** at USC.
 
 ---
 
-### 📄 Artwork Results
-- Display artworks in responsive grid (4 × 3 layout)
-- Each artwork card shows:
-  - Image (or placeholder)
+### 🖼️ Artwork Results
+- Responsive grid layout (4 columns × 3 rows per page)
+- Each artwork card displays:
+  - Image (or placeholder if unavailable)
   - Title
   - Artist
-  - Date
-  - Museum badge
+  - Year
+  - Museum badge (Met / Harvard)
 
 ---
 
@@ -42,43 +42,41 @@ This project was developed as part of **CSCI 571 (Web Technologies)** at USC.
 - Server-side pagination
 - Displays:
   - Total number of artworks
-  - Current page number
+  - Current page (Page X of Y)
 - Navigation:
   - Previous / Next buttons
 
 ---
 
 ### 🔎 Detail View
-Clicking an artwork opens detailed information with tabs:
+
+Clicking an artwork opens a detailed page with multiple tabs:
 
 #### 🧾 Overview
-- Image
-- Title
-- Artist
-- Medium
-- Dimensions
-- Department
-- Museum link
+- Artwork image
+- Title, artist, date
+- Medium, dimensions, department
+- Link to museum website
 
 #### 📖 Artist Biography
-- Retrieved from Wikipedia API
-- Includes description and summary
+- Fetched from Wikipedia API
+- Includes summary and description
 
 #### 🖼️ Related Works
-- Shows artworks from the same artist
-- Clickable → opens another detail view
+- Displays artworks from the same artist
+- Fully clickable → opens another detail view
 
 #### 🗺️ Museum Location
 - Interactive map using Leaflet.js
-- Displays museum location with marker
+- Shows museum location with marker and popup
 
 ---
 
 ### ❤️ Favorites
-- Add/remove artworks to favorites
-- Stored in `localStorage`
+- Add / remove artworks to favorites
+- Stored in browser `localStorage`
 - Dedicated Favorites page
-- Persistent across page reloads
+- Persistent after refresh
 
 ---
 
@@ -88,13 +86,13 @@ Clicking an artwork opens detailed information with tabs:
 - HTML5 / CSS3
 - Bootstrap 5 (responsive design)
 - Vanilla JavaScript
-- Leaflet.js (map)
+- Leaflet.js (map integration)
 
 ### Backend
 - Node.js
 - Express.js
 
-### APIs
+### APIs Used
 - Met Museum API
 - Harvard Art Museums API
 - Wikipedia API
@@ -105,3 +103,15 @@ Clicking an artwork opens detailed information with tabs:
 ---
 
 ## 📦 Project Structure
+art-explorer/
+├── server.js
+├── package.json
+├── package-lock.json
+├── Dockerfile
+├── public/
+│ ├── index.html
+│ ├── css/
+│ └── js/
+├── process_log.txt
+
+---
