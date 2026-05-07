@@ -100,18 +100,3 @@ Clicking an artwork opens a detailed page with multiple tabs:
 ### Deployment
 - Google Cloud Run (Docker container)
 
----
-
-## 📦 Project Structure
-art-explorer/
-├── server.js
-├── package.json
-├── package-lock.json
-├── Dockerfile
-├── public/
-│ ├── index.html
-│ ├── css/
-│ └── js/
-├── process_log.txt
-
----
